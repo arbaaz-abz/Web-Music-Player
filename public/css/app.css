@@ -1,0 +1,36 @@
+body, html, .container-fluid{
+	height:100%;
+}
+.link{ cursor: pointer; color:#0000E9; }
+.link:hover{text-decoration: underline;}
+
+#albums{ overflow: auto; height:800px;}
+#albums .album{ padding-left:15px; cursor: pointer; color:#0000E9; }
+
+#center{ height: 100%; overflow: auto;}
+#right{ height: 100%; overflow: auto;}
+#right .song{ padding-left:20px; position: relative;}
+#right .song .delete{ position: absolute; right:4px;}
+#right .current{ background:url(../img/play.png) center left no-repeat; }
+
+#bottom{ position: fixed; bottom:0px; left:15%;height: 50%;}
+
+h3{
+    text-align: center;
+}
+
+.native-player{
+    width:100%;
+}
+
+
+#volumeBar {
+	background-color : #444444;
+	border-left: 1px solid #000;
+	border-radius: 0px;
+	border-bottom-right-radius: 4px;
+	padding: 1px;
+	border-top-width: 0px;
+	padding-top: 0px;
+	border-right : 0px;
+}

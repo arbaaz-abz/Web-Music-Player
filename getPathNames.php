@@ -8,7 +8,7 @@ function scanFolders($dir){
     if(!is_readable($dir)){
         return $dirs;
     }
-    $dir = 'C:/xampp/htdocs/FS Project/fs/library_processing/My Music/';
+    $dir = 'C:/xampp/htdocs/FS Project/fs/library/My Music/';
     $myfile = fopen("track_paths.txt", "w") or die("Unable to open file!");
     $list = scandir($dir);
     $i=0;

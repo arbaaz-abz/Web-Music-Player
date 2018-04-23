@@ -1,0 +1,21 @@
+
+Imagine Dragons|Radioactive|C:/xampp/htdocs/FS Project/fs/library/My Music/01 Radioactive.mp3
+Cubicolor|Dead End Thrills (Extended Mix)|C:/xampp/htdocs/FS Project/fs/library/My Music/01-cubicolor-dead_end_thrills_(extended_mix)-spk.mp3
+Hardwell Feat. Amba Shepherd|Apollo (Original Mix)|C:/xampp/htdocs/FS Project/fs/library/My Music/01-hardwell_feat._amba_shepherd-apollo_(original_mix).mp3
+Metallica|Enter Sandman|C:/xampp/htdocs/FS Project/fs/library/My Music/02 - Enter Sandman.mp3
+Coldplay|Magic|C:/xampp/htdocs/FS Project/fs/library/My Music/02 Magic.mp3
+Hardwell Feat Mitch Crown|Call Me A Spaceman (Extended Mix)|C:/xampp/htdocs/FS Project/fs/library/My Music/02-hardwell_feat_mitch_crown_-_call_me_a_spaceman_(extended_mix)-zzzz.mp3
+Linkin Park|Burn It Down|C:/xampp/htdocs/FS Project/fs/library/My Music/03 - Burn It Down.mp3
+Metallica|Master of Puppets|C:/xampp/htdocs/FS Project/fs/library/My Music/03 - Master of Puppets.mp3
+Imagine Dragons|Demons|C:/xampp/htdocs/FS Project/fs/library/My Music/04 Demons.mp3
+Imagine Dragons|I Bet My Life|C:/xampp/htdocs/FS Project/fs/library/My Music/05. I Bet My Life.mp3
+Linkin Park|Castle Of Glass|C:/xampp/htdocs/FS Project/fs/library/My Music/06 - Castle Of Glass.mp3
+Coldplay|A Sky Full of Stars|C:/xampp/htdocs/FS Project/fs/library/My Music/08 A Sky Full Of Stars.mp3
+The Chainsmokers|Paris|C:/xampp/htdocs/FS Project/fs/library/My Music/08 Paris.mp3
+Justin Timberlake|Mirrors|C:/xampp/htdocs/FS Project/fs/library/My Music/09. Mirrors (www.SongsLover.pk).mp3
+Linkin Park|Final Masquerade|C:/xampp/htdocs/FS Project/fs/library/My Music/11 Final Masquerade.mp3
+David Guetta|Titanium - Feat. Sia|C:/xampp/htdocs/FS Project/fs/library/My Music/12 Titanium - Feat. Sia.mp3
+Avicii|Lonely Together (feat. Rita Ora)|C:/xampp/htdocs/FS Project/fs/library/My Music/2. Lonely Together -feat. Rita Ora-.mp3
+David Guetta|The Alphabeat|C:/xampp/htdocs/FS Project/fs/library/My Music/David Guetta-The Alphabeat.mp3
+Dualism Records|Isoterra|C:/xampp/htdocs/FS Project/fs/library/My Music/Dualism Records - Doppelganger LP - 08 Isoterra.mp3
+Drake|God's Plan|C:/xampp/htdocs/FS Project/fs/library/My Music/God's Plan.mp3

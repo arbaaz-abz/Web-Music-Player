@@ -1,0 +1,21 @@
+
+3:07|Radioactive|C:/xampp/htdocs/FS Project/fs/library/My Music/01 Radioactive.mp3
+4:25|Dead End Thrills (Extended Mix)|C:/xampp/htdocs/FS Project/fs/library/My Music/01-cubicolor-dead_end_thrills_(extended_mix)-spk.mp3
+5:12|Apollo (Original Mix)|C:/xampp/htdocs/FS Project/fs/library/My Music/01-hardwell_feat._amba_shepherd-apollo_(original_mix).mp3
+5:30|Enter Sandman|C:/xampp/htdocs/FS Project/fs/library/My Music/02 - Enter Sandman.mp3
+4:45|Magic|C:/xampp/htdocs/FS Project/fs/library/My Music/02 Magic.mp3
+6:19|Call Me A Spaceman (Extended Mix)|C:/xampp/htdocs/FS Project/fs/library/My Music/02-hardwell_feat_mitch_crown_-_call_me_a_spaceman_(extended_mix)-zzzz.mp3
+3:52|Burn It Down|C:/xampp/htdocs/FS Project/fs/library/My Music/03 - Burn It Down.mp3
+8:38|Master of Puppets|C:/xampp/htdocs/FS Project/fs/library/My Music/03 - Master of Puppets.mp3
+2:58|Demons|C:/xampp/htdocs/FS Project/fs/library/My Music/04 Demons.mp3
+3:13|I Bet My Life|C:/xampp/htdocs/FS Project/fs/library/My Music/05. I Bet My Life.mp3
+3:25|Castle Of Glass|C:/xampp/htdocs/FS Project/fs/library/My Music/06 - Castle Of Glass.mp3
+4:29|A Sky Full of Stars|C:/xampp/htdocs/FS Project/fs/library/My Music/08 A Sky Full Of Stars.mp3
+3:42|Paris|C:/xampp/htdocs/FS Project/fs/library/My Music/08 Paris.mp3
+8:06|Mirrors|C:/xampp/htdocs/FS Project/fs/library/My Music/09. Mirrors (www.SongsLover.pk).mp3
+3:35|Final Masquerade|C:/xampp/htdocs/FS Project/fs/library/My Music/11 Final Masquerade.mp3
+4:05|Titanium - Feat. Sia|C:/xampp/htdocs/FS Project/fs/library/My Music/12 Titanium - Feat. Sia.mp3
+3:02|Lonely Together (feat. Rita Ora)|C:/xampp/htdocs/FS Project/fs/library/My Music/2. Lonely Together -feat. Rita Ora-.mp3
+4:29|The Alphabeat|C:/xampp/htdocs/FS Project/fs/library/My Music/David Guetta-The Alphabeat.mp3
+5:04|Isoterra|C:/xampp/htdocs/FS Project/fs/library/My Music/Dualism Records - Doppelganger LP - 08 Isoterra.mp3
+3:19|God's Plan|C:/xampp/htdocs/FS Project/fs/library/My Music/God's Plan.mp3

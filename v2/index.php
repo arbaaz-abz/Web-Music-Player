@@ -1,12 +1,23 @@
 <?php
 require_once "config.php";
 include 'getPathNames.php';
+$title = "";
+session_start(); 
 if(isset($_POST['type'])) {
-    session_start();                                		
+    //Add current track to session playlist array
+    array_push($_SESSION['playlist'],$_POST['type']); 
+    //copy session playlist array to local playlist array     
+    $playlist_array = array_unique($_SESSION['playlist']);
+    $_SESSION['playlist'] = array_unique($playlist_array);
+	//Get session variables
+    $_SESSION['title'] = $_POST['type'];  
+    $title = $_SESSION['title'];               		
     $selected_val = $_SESSION['sort_by']; 
 	$_POST['submittype'] = $_SESSION['submittype'];
 	$_POST['sort_by'] = $selected_val;
 	$path = "";
+
+	//Find path of current track & add it to a session variable
 	if ($selected_val === 'artist') {
 		$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\artist_index_sort.txt');
 		$i=0;
@@ -97,7 +108,7 @@ if(isset($_POST['type'])) {
                                         <audio id="player"></audio>
                                     <?php } else if( $music_player === 'native' ) { ?>
                                         <audio controls id="player" class="native-player">
-                                            <source src= <?php if(isset($_SESSION['path'])) echo $_SESSION['path'];?> type="audio/mpeg">
+                                            <source src= <?php //session_start(); if(isset($_SESSION['path'])) echo $_SESSION['path'];?> type="audio/mpeg">
                                         </audio>
                                     <?php 
                                 	} 
@@ -122,12 +133,25 @@ if(isset($_POST['type'])) {
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<tr bgcolor="#FF532E">
 						<th><h3>Songs</h3></th>
 					</tr>
 					<tr ng-repeat="song in directorysongs">
 						<td ng-click="addSong(song)" class="link">
 							{{song.name}}
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+							<?php 
+								//Display Songs from the local Playlist array
+								if(!empty($_SESSION['playlist'])) {
+									for($i = 0; $i < count($_SESSION['playlist']); $i++) {
+									    echo $_SESSION['playlist'][$i].'<br>';
+									}
+								}
+							?>
 						</td>
 					</tr>
 				</table>
@@ -149,9 +173,11 @@ if(isset($_POST['type'])) {
 											//$_SESSION['track'] = $_POST['type'];
 											if(isset($_POST['submittype'])) {
 
+												//Display The Songs based on SORT criteria
+
 												if(isset($_POST['sort_by'])) {
 											    	$selected_val = $_POST['sort_by'];
-											    	session_start();
+											    	//session_start();
 											    	$_SESSION['sort_by'] = $selected_val;
 											    	$_SESSION['submittype'] = $_POST['submittype'];
 											    }  // Storing Selected Value In Variable
@@ -303,3 +329,4 @@ if(isset($_POST['type'])) {
 
 </body>
 </html>
+

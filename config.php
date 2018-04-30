@@ -4,6 +4,6 @@ $host = 'http://'.$_SERVER['HTTP_HOST'].str_replace("public/config.php", "", $_S
 $library = $root."library/";
 $exclude_dirs = array(".", "..", "public", ".git");
 $dynamic_dir_scan = true;
-//$music_player = 'native';
-$music_player = 'flash';
+$music_player = 'native';
+//$music_player = 'flash';
 ?>

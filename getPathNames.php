@@ -32,7 +32,7 @@ function scanFolders($dir){
     //echo "<pre>".print_r($list, true)."</pre>";
     */
 }
-$dirs = scanFolders($library1);
+$dirs = scanFolders($library);
 /*
 if($dynamic_dir_scan === true){
     echo json_encode($dirs);

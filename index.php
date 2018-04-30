@@ -1,90 +1,140 @@
 <?php
+/*
+	===============================SESSION VARIABLES=============================================================
+	
+	$_POST['type']					   = Current Chosen Track
+	$_SESSION['playlist'] 	   		   = Array of Titles ( Of Local Playlist )
+	$_SESSION['playlist-path'] 		   = Array of Paths ( Of Local Playlist  )
+	$_SESSION['title'] 				   = Title Of The Current Track chosen by User [When he hits Add To Playlist]
+	$_SESSION['sort_by'] 			   = The Sort By Criteria (artist , album , play-time)
+	$_SESSION['submittype']   	 	   = To ensure The Sort By Button is always Enabled
+	$_SESSION['track'] 				   = Title Of The Current Track chosen by User [When he hits Add To Playlist]
+	$_SESSION['path'] 				   = Path Of Track which is Chosen by User [When he hits Add To Playlist]
+	$_SESSION['current_playlist']	   = Name of Loaded Playlist 
+	$_SESSION['current_playlist_path'] = Paths of Tracks In The Loaded Playlist 
+
+	=============================================================================================================
+*/
 require_once "config.php";
 include 'getPathNames.php';
 $title = "";
 session_start(); 
+//Check if User Choose To Add a Song To Playlist
 if(isset($_POST['type'])) {
-	$title_extract = explode(" - ", $_POST['type']);
-    //Add current track to session playlist array
-    if(!isset($_SESSION['playlist'])) {
-    	$_SESSION['playlist'] = array();
-    	array_push($_SESSION['playlist'],$title_extract[1]);
-    } 
-    else {
-    	array_push($_SESSION['playlist'],$title_extract[1]);
-    	//Make the session playlist array unique     
-	    $playlist_array = array_unique($_SESSION['playlist']);
-	    $_SESSION['playlist'] = array_unique($playlist_array);
-	}
-	//Get session variables
-    $_SESSION['title'] = $_POST['type'];  
-    $title = $_SESSION['title'];               		
-    $selected_val = $_SESSION['sort_by']; 
-	$_POST['submittype'] = $_SESSION['submittype'];
-	$_POST['sort_by'] = $selected_val;
-	$path = "";
 
-	//Find path of current track & add it to a session variable
-	if ($selected_val === 'artist') {
-		$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\artist_index_sort.txt');
-		$i=0;
-		foreach ($myfile as $line) { 
-			$artist = explode("|", $line);
-			if($i === 0) {
-				$i++;
-				continue;
-			}
-			$line = $artist[1];
-			if($line===$title_extract[1]) {
-				$path = $artist[2];
+	if(isset($_SESSION['current_playlist'])) {
+		$lines = $_SESSION['current_playlist_path'];
+		$linepath = file($lines);
+		foreach ($linepath as $name) {
+			$line = explode("|", $name);
+			$songname = $line[0];
+			if($songname ===$_POST['type']){
+				$path = $line[1];
 				break;
-			}    
+			}
 		}
-		$_SESSION['path'] = $path;
 	}
-	elseif ($selected_val === 'album') {
-		$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\album_index_sort.txt');
-		$i=0;
-		foreach ($myfile as $line) { 
-			$artist = explode("|", $line);
-			if($i === 0) {
-				$i++;
-				continue;
+	else{
+		//Split into Array , Based on - as delimiter
+		$title_extract = explode(" - ", $_POST['type']);
+
+		//Check if playlist array & playlist path array is initialized    
+	    if(!isset($_SESSION['playlist']) && !isset($_SESSION['playlist-path'])) {
+	    	//playlist array & playlist path array initialization
+	    	$_SESSION['playlist'] = array();
+	    	$_SESSION['playlist-path'] = array();
+	    } 
+	    //Add current track to session playlist array
+	    array_push($_SESSION['playlist'],$title_extract[1]);
+	    //Make playlist array unique  (Removing Duplicate Entries)   
+		$playlist_array = array_unique($_SESSION['playlist']);
+		$_SESSION['playlist'] = array_unique($playlist_array);
+
+		//Set Other Parameters
+	    $_SESSION['title'] = $_POST['type'];  
+	    $title = $_SESSION['title'];               		
+	    $selected_val = $_SESSION['sort_by']; 
+		$_POST['submittype'] = $_SESSION['submittype'];
+		$_POST['sort_by'] = $selected_val;
+		$path = "";
+
+		//Find path of current track & add it to a local variable "path"
+		if ($selected_val === 'artist') {
+			$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\artist_index_sort.txt');
+			$i=0;
+			foreach ($myfile as $line) { 
+				$artist = explode("|", $line);
+				if($i === 0) {
+					$i++;
+					continue;
+				}
+				$line = $artist[1];
+				if($line===$title_extract[1]) {
+					$path = $artist[2];
+					break;
+				}    
 			}
-			$line = $artist[1];
-			if($line===$title_extract[1]) {
-				$path = $artist[2];
-				break;
-			}  
 		}
-		$_SESSION['path'] = $path;
-	}
-	if ($selected_val === 'play-time') {
-		$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\play_time_index_sort.txt');
-		$i=0;
-		foreach ($myfile as $line) { 
-			$artist = explode("|", $line);
-			if($i === 0) {
-				$i++;
-				continue;
+		elseif ($selected_val === 'album') {
+			$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\album_index_sort.txt');
+			$i=0;
+			foreach ($myfile as $line) { 
+				$artist = explode("|", $line);
+				if($i === 0) {
+					$i++;
+					continue;
+				}
+				$line = $artist[1];
+				if($line===$title_extract[1]) {
+					$path = $artist[2];
+					break;
+				}  
 			}
-			$line = $artist[1];
-			if($line===$title_extract[1]) {
-				$path = $artist[2];
-				break;
-			}  
 		}
-		$_SESSION['path'] = $path;
-	}									
+		if ($selected_val === 'play-time') {
+			$myfile = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\play_time_index_sort.txt');
+			$i=0;
+			foreach ($myfile as $line) { 
+				$artist = explode("|", $line);
+				if($i === 0) {
+					$i++;
+					continue;
+				}
+				$line = $artist[1];
+				if($line===$title_extract[1]) {
+					$path = $artist[2];
+					break;
+				}  
+			}
+		}	
+	}				
+	//Copy name and path to session variables 			
 	$_SESSION['track'] = $_POST['type'];
-}
+	$_SESSION['path'] = $path;	
+	array_push($_SESSION['playlist-path'],$path);
+	//Make the playlist path array unique     
+	$path_array = array_unique($_SESSION['playlist-path']);
+	$_SESSION['playlist-path'] = array_unique($path_array);	
+	$_SESSION['track'] = $_POST['type'];
+}	
+//Check's if Clear Playlist Button is enabled
 if(isset($_POST['clear-playlist'])) {
-	unset($_SESSION['playlist']);
-	$selected_val = $_SESSION['sort_by']; 
-	$_POST['submittype'] = $_SESSION['submittype'];
-	$_POST['sort_by'] = $selected_val;
-	$path = "";
-}
+		//Checks if any Playlist has been Loaded
+		if(isset($_SESSION['current_playlist'])) {
+			//Uninitialize the chosen playlist
+			unset($_SESSION['current_playlist']);
+			unset($_SESSION['current_playlist_path']);
+		}
+
+		//Clear the local chosen playlist
+		unset($_SESSION['playlist']);
+		unset($_SESSION['playlist-path']);
+
+		//Set Other Parameters
+		$selected_val = $_SESSION['sort_by']; 
+		$_POST['submittype'] = $_SESSION['submittype'];
+		$_POST['sort_by'] = $selected_val;
+}	
 ?>
 
 <!DOCTYPE html>
@@ -107,44 +157,32 @@ if(isset($_POST['clear-playlist'])) {
 	<script type="text/javascript" src="./public/app/js/filters.js"></script>
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span12">
 				<table class="table table-bordered">
-					<tr bgcolor="#FF532E">
+					<tr>
                         <td >
                             <div id="musicplayer">
                                     <?php if($music_player === 'flash') { ?>
                                         <audio id="player"></audio>
-                                    <?php } else if( $music_player === 'native' ) { ?>
+                                    <?php } else if( $music_player === 'native' ) {
+	                                    		$songpath = $_SESSION['path'];
+	                                    		$songpath1 = explode("/",$songpath);
+	                                    		$songtitle = $songpath1[7];
+	                                    		$songtitle = str_replace(" ","%20",$songtitle);
+	                                    		$arg = "proxy.php?name=".$songtitle;
+                                    	?>
                                         <audio controls id="player" class="native-player">
-                                            <source src="{{currentSongPath}}" type="audio/mpeg">
+                                            <source src=<?=$arg?> type="audio/mpeg">
                                         </audio>
                                     <?php } ?>
                             </div>
                         </td>
                     </tr>
-                    <?php if($music_player === 'flash') { ?>
-                    <tr>
-                        <td>
-                            <div class="widget-align	2">
-                                <input type="range" id="volumeBar" min="0" max="5" step="0.01" value="1" onmousemove="changeVolume(this.value);" onchange="changeVolume(this.value);" />
-                            </div>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                    <tr>
-						<td >
-							<div class="wrapper">
-								<form action="index.php" method="post">
-									<button type="submit" name="clear-playlist" class="btn" formaction="index.php">Clear Playlist</button>
-								</form>								
-							</div>
-						</td>
-					</tr>
-					<tr bgcolor="#FF532E">
-						<th><h3>Songs</h3></th>
+					<tr bgcolor="#A584ED">
+						<th><h3>Current Playlist : <?php if(isset($_SESSION['current_playlist'])) echo $_SESSION['current_playlist']; 
+													else echo "NONE"; ?></h3></th>
 					</tr>
 					<tr ng-repeat="song in directorysongs">
 						<td ng-click="addSong(song)" class="link">
@@ -153,14 +191,25 @@ if(isset($_POST['clear-playlist'])) {
 					</tr>
 					<tr>
 						<td>
-
 							<?php 
-								//Display Songs from the local Playlist array
-								if(!empty($_SESSION['playlist'])) {
-									for($i = 0; $i < count($_SESSION['playlist']); $i++) {
-									    echo $_SESSION['playlist'][$i].'<br>';
+									//Check's if any Playlist has been loaded 
+									//If Loaded then print it's contents
+									if(isset($_SESSION['current_playlist'])) {
+										$handle = file($_SESSION['current_playlist_path']) or die("Unable to open file!");
+										foreach ($handle as $name) { 
+											$track_title = explode("|", $name);
+											echo $track_title[0].'<br>';
+										}
 									}
-								}
+									// Else Display the local Playlist
+									else {
+
+											if(isset($_SESSION['playlist'])) {
+												for($i = 0; $i < count($_SESSION['playlist']); $i++) {
+												    echo $_SESSION['playlist'][$i].'<br>';
+												}
+											}
+									}
 							?>
 						</td>
 					</tr>
@@ -170,7 +219,7 @@ if(isset($_POST['clear-playlist'])) {
 					<div class="span4" id="albums">
 						<table class="table table-bordered">
 							<thead>
-								<tr bgcolor="#FF532E">
+								<tr bgcolor="#A584ED	">
 									<th><h3>My Music</h3></th>
 
 								</tr>
@@ -180,18 +229,15 @@ if(isset($_POST['clear-playlist'])) {
 										<td>
 										<select name="type" id="type">
 											<?php
-											//$_SESSION['track'] = $_POST['type'];
-											if(isset($_POST['submittype'])) {
-
+											//Check the Sort By Criteria chosen by user
+											if(isset($_POST['submittype'])) {												
 												//Display The Songs based on SORT criteria
-
 												if(isset($_POST['sort_by'])) {
 											    	$selected_val = $_POST['sort_by'];
 											    	//session_start();
 											    	$_SESSION['sort_by'] = $selected_val;
 											    	$_SESSION['submittype'] = $_POST['submittype'];
 											    }  // Storing Selected Value In Variable
-
 											    if($selected_val === 'artist') {
 											    	$names = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\artist_index_sort.txt');
 											    	foreach ($names as $name) { 
@@ -202,19 +248,16 @@ if(isset($_POST['clear-playlist'])) {
 											    		<option value="<?= $name ?>"> <?= $name ?> </option>
 											    		<?php 
 											    	}
-
 											    }
 											    elseif ($selected_val === 'album') {
 											    	$names = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\album_index_sort.txt');
 											    	foreach ($names as $name) { 
 											    		$album = explode("|", $name);
 											    		$name = $album[0]." - ".$album[1];
-
 											    		?>
 											    		<option value="<?= $name ?>"> <?= $name ?> </option>
 											    		<?php 
 											    	}
-
 											    }
 											    elseif($selected_val === 'play-time') {
 											    	$names = file('C:\xampp\htdocs\FS Project\fs\sort_by\index_files\play_time_index_sort.txt');
@@ -228,20 +271,28 @@ if(isset($_POST['clear-playlist'])) {
 												}
 											}
 											else {
-												?>
-												
-												<?php
+												$pathnames = array();
+												$pathnames = $_SESSION['current_playlist_path'];
+												$path = file($pathnames);
+												foreach ($path as $name) { 
+											    	$play = explode("|", $name);
+											    	$name = $play[0];
+												    ?>
+													<option value="<?= $name ?>"> <?= $name ?></option>
+													<?php
+												}
 											}
-											?>
+										?>
 										    </td>
 											</tr>
 											<tr>
 												<td>
 													<div class="wrapper">
-														<input type="submit" name="submit" class="btn-success" value="PLAY SONG"/>
+														<input type="submit" name="submit" class="btn" value="Play Song"/>
 													</div>
 												</td>
 											</tr>
+
 									</form>
 						</table>
 					</div>
@@ -249,15 +300,30 @@ if(isset($_POST['clear-playlist'])) {
 					<div class="span4" >
 						<table class="table table-bordered">
 							<thead>
-								<tr bgcolor="#FF532E">
+								<tr bgcolor="#A584ED">
 									<th><h3>Playlist</h3></th>
 								</tr>
 							</thead>
-							<tr >
+							<tr>
 								<td >
-									<div class = "wrapper">
-										<div class="btn" ng-click="addAllSongs(directorysongs)" >Save Playlist</div>
-										<div class="btn" ng-click="deleteAllSongs()">Rename Playlist</div>
+									<div class="wrapper">
+										<form action="load_playlist.php" method="post">
+											<button type="submit" name="load-playlist" class="btn" formaction="load_playlist.php">Load Playlist</button>
+										</form>								
+									</div>
+									<div class="wrapper">
+										<form action="save_playlist.php" method="post">
+											<button type="submit" name="save-playlist" class="btn" formaction="save_playlist.php">Save Playlist</button>
+										</form>								
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td >
+									<div class="wrapper">
+										<form action="index.php" method="post">
+											<button type="submit" name="clear-playlist" class="btn" formaction="index.php">Clear Playlist</button>
+										</form>								
 									</div>
 								</td>
 							</tr>
@@ -275,7 +341,7 @@ if(isset($_POST['clear-playlist'])) {
 					<div class="span4" >
 						<table class="table table-bordered">
 							<thead>
-								<tr bgcolor="#FF532E">
+								<tr bgcolor="#A584ED">
 									<th><h3>Sort By</h3></th>
 								</tr>
 							</thead>
@@ -305,7 +371,7 @@ if(isset($_POST['clear-playlist'])) {
 									<tr>
 										<td>
 											<div class="wrapper">
-												<input type="submit" name="submittype" class="btn-success" value="SORT"/>
+												<input type="submit" name="submittype" class="btn" value="SORT"/>
 											</div>
 										</td>
 									</tr>
@@ -324,13 +390,11 @@ if(isset($_POST['clear-playlist'])) {
 	</div>
 	<script type="text/javascript">
 		var currentSongIndex = 0;
-
 		if(config.musicPlayer == 'flash') {
 			appPlayer.player = audiojs.newInstance(document.getElementById("player"));
 		} else if( config.musicPlayer == 'native'){
 			appPlayer.player = appPlayer.nativePlayer();
 		}
-
 		function changeVolume(n) {
 			var player = document.getElementById("player");
 			player.volume = n;
@@ -339,4 +403,3 @@ if(isset($_POST['clear-playlist'])) {
 
 </body>
 </html>
-

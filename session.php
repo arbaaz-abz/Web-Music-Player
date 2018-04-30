@@ -1,3 +1,4 @@
+
 <?php
    include('config.php');
    session_start();
@@ -9,6 +10,7 @@
    echo $button_val.'<br>';
    echo $track.'<br>';
    echo $path.'<br>';
+   print_r($_SESSION['current_playlist']);
    //$row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
    //$login_session = $row['username'];
    //if(!isset($_SESSION['login_user'])){
